@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>waktu yang sudah berlalu</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #0e0e0e; /* Warna latar belakang lebih gelap */
+            color: #00ffcc; /* Warna teks hijau muda */
+        }
+
+        #countdown-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 20px; /* Tambahkan jarak di bagian bawah countdown-container */
+        }
+
+        .countdown-box {
+            border: 2px solid #00ffcc; /* Garis tepi hijau muda */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #111; /* Warna latar belakang lebih gelap */
+            color: #fff; /* Warna teks putih */
+            transition: background-color 0.3s;
+            animation: fadeIn 1s ease-in-out; /* Animasi muncul */
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.5); /* Shadow */
+        }
+
+        .countdown-box:hover {
+            background-color: #1a1a1a; /* Warna latar belakang saat dihover */
+        }
+
+        .countdown-box b {
+            font-size: 36px;
+        }
+
+        button {
+            background-color: #00ffcc; /* Latar belakang tombol hijau muda */
+            color: #111; /* Warna teks lebih gelap */
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            animation: pulse 1s infinite;
+        }
+
+        button:hover {
+            background-color: #1a1a1a; 
+        }
+
+        #days {
+            margin-left: 10px; 
+        }
+
+        h2 {
+            color: #00ffcc; 
+            animation: slideIn 1s ease-in-out; 
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>DURASI LIBURAN YANG SUDAH DILALUI</h2>
+
+    <div id="countdown-container">
+        <div class="countdown-box" id="hours">
+            <div id="hours-number"></div>
+            <div>Jam</div>
+        </div>
+
+        <div class="countdown-box" id="minutes">
+            <div id="minutes-number"></div>
+            <div>Menit</div>
+        </div>
+
+        <div class="countdown-box" id="seconds">
+            <div id="seconds-number"></div>
+            <div>Detik</div>
+        </div>
+    </div>
+
+    <button id="days">Days</button>
+
+    <script>
+        var countdownDate = new Date("February 10, 2024 18:20:00 GMT+0700").getTime();
+
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = now - countdownDate;  
+
+            var days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+            var hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+            var minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+            var seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
+
+            document.getElementById("hours-number").innerHTML = "<b>" + hours + "</b>";
+            document.getElementById("minutes-number").innerHTML = "<b>" + minutes + "</b>";
+            document.getElementById("seconds-number").innerHTML = "<b>" + seconds + "</b>";
+            document.getElementById("days").innerHTML = days + " Hari";
+        }, 1000);
+    </script>
+</body>
+</html>
